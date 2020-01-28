@@ -3,9 +3,6 @@
         <div class="card-header">Files List</div>
         <div class="card-body">
             <div>
-                <button v-on:click="create()">Create File</button>
-            </div>
-            <div>
                 <vue-json-pretty
                     :path="'res'"
                     :data="{ file }">
@@ -35,11 +32,5 @@
                     this.file = response.data.message;
                 });
         },
-
-        methods: {
-            create: function () {
-                axios.post('/api/file/create');
-            }
-        }
     }
 </script>
