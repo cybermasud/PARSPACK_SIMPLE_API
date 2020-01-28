@@ -2,11 +2,10 @@
     <div class="card">
         <div class="card-header">Running Processes</div>
         <div class="card-body">
-            <div class="alert alert-success" role="alert">
+            <div>
                 <vue-json-pretty
                     :path="'res'"
-                    :data="{ processes }"
-                    >
+                    :data="{ processes }">
                 </vue-json-pretty>
             </div>
         </div>
