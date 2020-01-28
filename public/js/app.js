@@ -1924,6 +1924,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1940,6 +1943,11 @@ __webpack_require__.r(__webpack_exports__);
     axios.get('/api/file').then(function (response) {
       _this.file = response.data.message;
     });
+  },
+  methods: {
+    create: function create() {
+      axios.post('/api/file/create');
+    }
   }
 });
 
@@ -1970,6 +1978,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
@@ -1986,6 +1997,11 @@ __webpack_require__.r(__webpack_exports__);
     axios.get('/api/folder').then(function (response) {
       _this.folder = response.data.message;
     });
+  },
+  methods: {
+    create: function create() {
+      axios.post('/api/folder/create');
+    }
   }
 });
 
@@ -37422,6 +37438,20 @@ var render = function() {
     _c("div", { staticClass: "card-header" }, [_vm._v("Files List")]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
+      _c("div", [
+        _c(
+          "button",
+          {
+            on: {
+              click: function($event) {
+                return _vm.create()
+              }
+            }
+          },
+          [_vm._v("Create File")]
+        )
+      ]),
+      _vm._v(" "),
       _c(
         "div",
         [
@@ -37460,6 +37490,20 @@ var render = function() {
     _c("div", { staticClass: "card-header" }, [_vm._v("Folders List")]),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
+      _c("div", [
+        _c(
+          "button",
+          {
+            on: {
+              click: function($event) {
+                return _vm.create()
+              }
+            }
+          },
+          [_vm._v("Create Folder")]
+        )
+      ]),
+      _vm._v(" "),
       _c(
         "div",
         [
