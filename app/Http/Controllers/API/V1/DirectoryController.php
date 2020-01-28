@@ -12,7 +12,7 @@ class DirectoryController extends Controller
 
     public function createDir()
     {
-        $path = 'c:\xampp\htdocs/' . Auth::user()->name;
+        $path = '/opt/myprogram/' . Auth::user()->name;
         if (is_dir($path)) {
             return response()->json(['message' => 'Directory Exists']);
         }
@@ -22,7 +22,7 @@ class DirectoryController extends Controller
 
     public function createFile()
     {
-        $path = 'C:\Users\Masood\Desktop/' . Auth::user()->name;
+        $path = '/opt/myprogram/' . Auth::user()->name;
         if (is_file($path)) {
             return response()->json(['message' => 'File Exists']);
         }
