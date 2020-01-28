@@ -19,7 +19,7 @@
         },
 
         mounted() {
-            axios.get('index.php/api/user')
+            axios.get('/api/user')
                 .then(response => {
                     this.name = response.data.name;
                 });
