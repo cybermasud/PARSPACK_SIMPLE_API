@@ -32,13 +32,13 @@ class DirectoryController extends Controller
 
     public function folderList()
     {
-        exec('ls -F | grep \/$', $message);
+        exec('ls /opt/myprogram/ -F | grep \/$', $message);
         return response()->json(['message' => $message]);
     }
 
     public function fileList()
     {
-        exec('ls -p | grep -v /', $message);
+        exec('ls /opt/myprogram/ -p | grep -v /', $message);
         return response()->json(['message' => $message]);
     }
 
