@@ -76,4 +76,9 @@ class UserController extends Controller
         ]);
     }
 
+    public function users()
+    {
+        return response()->json(['name' => 'parspack']);
+    }
+
 }
