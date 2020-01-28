@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class DirectoryController extends Controller
 {
 
-    public function createDir()
+    public function createFolder()
     {
         $path = '/opt/myprogram/' . Auth::user()->name;
         if (is_dir($path)) {
@@ -30,7 +30,7 @@ class DirectoryController extends Controller
         return response()->json(['message' => 'File Created']);
     }
 
-    public function dirList()
+    public function folderList()
     {
         exec('ls -F | grep \/$', $message);
         return response()->json(['message' => $message]);

@@ -24,8 +24,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         exec('ps aux',$message);
         return response()->json(['message'=> $message]);
     });
-    Route::get('dir',[DirectoryController::class,'dirList']);
+    Route::get('folder',[DirectoryController::class,'folderList']);
     Route::get('file',[DirectoryController::class,'fileList']);
-    Route::post('dir/create',[DirectoryController::class,'createDir']);
+    Route::post('folder/create',[DirectoryController::class,'createFolder']);
     Route::post('file/create',[DirectoryController::class,'createFile']);
 });

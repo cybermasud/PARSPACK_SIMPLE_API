@@ -7,5 +7,15 @@
             <processes-component></processes-component>
         </div>
     </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-8">
+            <folders-component></folders-component>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-8">
+            <files-component></files-component>
+        </div>
+    </div>
 </div>
 @endsection
