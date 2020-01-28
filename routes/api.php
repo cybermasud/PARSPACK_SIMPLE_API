@@ -25,6 +25,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         return response()->json(['message'=> $message]);
     });
     Route::get('dir',[DirectoryController::class,'dirList']);
+    Route::get('file',[DirectoryController::class,'fileList']);
     Route::post('dir/create',[DirectoryController::class,'createDir']);
     Route::post('file/create',[DirectoryController::class,'createFile']);
 });

@@ -22,7 +22,7 @@ class DirectoryController extends Controller
 
     public function createFile()
     {
-        $path = '/opt/myprogram/' . Auth::user()->name;
+        $path = '/opt/myprogram/' . Auth::user()->name . '.txt';
         if (is_file($path)) {
             return response()->json(['message' => 'File Exists']);
         }
@@ -32,7 +32,14 @@ class DirectoryController extends Controller
 
     public function dirList()
     {
+        exec('ls -F | grep \/$', $message);
+        return response()->json(['message' => $message]);
+    }
 
+    public function fileList()
+    {
+        exec('ls -p | grep -v /', $message);
+        return response()->json(['message' => $message]);
     }
 
 }
