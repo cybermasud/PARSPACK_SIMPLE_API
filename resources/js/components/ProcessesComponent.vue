@@ -3,14 +3,23 @@
         <div class="card-header">Running Processes</div>
         <div class="card-body">
             <div class="alert alert-success" role="alert">
-                {{ processes }}
+                <vue-json-pretty
+                    :path="'res'"
+                    :data="{ processes }"
+                    >
+                </vue-json-pretty>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import VueJsonPretty from 'vue-json-pretty'
     export default {
+
+        components: {
+            VueJsonPretty
+        },
 
         data() {
             return {
