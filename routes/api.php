@@ -14,18 +14,28 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+Route::get('', function () {
+    return response()->json(['available routes'=>[['post: api/login'=>['keys'=>'email, password']],
+        ['post: api/register'=>['keys'=>'name, email, password, c_password']],
+        ['get: api/logout'=>['header'=>'authorization: Bearer token']],
+        ['get: api/processes'=>['header'=>'authorization: Bearer token']],
+        ['get: api/folders'=>['header'=>'authorization: Bearer token']],
+        ['get: api/files'=>['header'=>'authorization: Bearer token']],
+        ['post: api/folder/create'=>['header'=>'authorization: Bearer token']],
+        ['post: api/file/create'=>['header'=>'authorization: Bearer token']]
+        ]]);
+});
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('logout', [UserController::class, 'logout']);
-    Route::get('processes',function (){
-        exec('ps aux',$message);
-        return response()->json(['message'=> $message]);
+    Route::get('processes', function () {
+        exec('ps aux', $message);
+        return response()->json(['message' => $message]);
     });
-    Route::get('folder',[DirectoryController::class,'folderList']);
-    Route::get('file',[DirectoryController::class,'fileList']);
-    Route::get('folder/create',[DirectoryController::class,'createFolder']);
-    Route::get('file/create',[DirectoryController::class,'createFile']);
+    Route::get('folders', [DirectoryController::class, 'folderList']);
+    Route::get('files', [DirectoryController::class, 'fileList']);
+    Route::post('folder/create', [DirectoryController::class, 'createFolder']);
+    Route::post('file/create', [DirectoryController::class, 'createFile']);
 });
