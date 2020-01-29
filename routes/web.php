@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home')->middleware('auth');
 
 Route::get('folder/create',[DirectoryController::class,'createFolder'])->name('folder_create')->middleware('auth');
 Route::get('file/create',[DirectoryController::class,'createFile'])->name('file_create')->middleware('auth');
