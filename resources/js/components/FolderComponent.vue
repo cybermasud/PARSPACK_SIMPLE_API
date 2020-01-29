@@ -27,7 +27,7 @@
         },
 
         mounted() {
-            axios.get('/api/folder')
+            axios.get('/api/folders')
                 .then(response => {
                     this.folder = response.data.message;
                 });
