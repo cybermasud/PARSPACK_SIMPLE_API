@@ -27,7 +27,7 @@
         },
 
         mounted() {
-            axios.get('/api/files')
+            axios.get('/api/file')
                 .then(response => {
                     this.file = response.data.message;
                 });

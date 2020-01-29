@@ -19,8 +19,8 @@ Route::get('', function () {
         ['post: api/register'=>['keys'=>'name, email, password, c_password']],
         ['get: api/logout'=>['header'=>'authorization: Bearer token']],
         ['get: api/processes'=>['header'=>'authorization: Bearer token']],
-        ['get: api/folders'=>['header'=>'authorization: Bearer token']],
-        ['get: api/files'=>['header'=>'authorization: Bearer token']],
+        ['get: api/folder'=>['header'=>'authorization: Bearer token']],
+        ['get: api/file'=>['header'=>'authorization: Bearer token']],
         ['post: api/folder/create'=>['header'=>'authorization: Bearer token']],
         ['post: api/file/create'=>['header'=>'authorization: Bearer token']]
         ]]);
@@ -34,8 +34,8 @@ Route::group(['middleware' => 'auth:api'], function () {
         exec('ps aux', $message);
         return response()->json(['message' => $message]);
     });
-    Route::get('folders', [DirectoryController::class, 'folderList']);
-    Route::get('files', [DirectoryController::class, 'fileList']);
+    Route::get('folder', [DirectoryController::class, 'folderList']);
+    Route::get('file', [DirectoryController::class, 'fileList']);
     Route::post('folder/create', [DirectoryController::class, 'createFolder']);
     Route::post('file/create', [DirectoryController::class, 'createFile']);
 });
