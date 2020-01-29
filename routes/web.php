@@ -11,6 +11,12 @@
 |
 */
 
+use App\Http\Controllers\API\V1\DirectoryController;
+use Illuminate\Support\Facades\Route;
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('folder/create',[DirectoryController::class,'createFolder'])->name('folder_create')->middleware('auth');
+Route::get('file/create',[DirectoryController::class,'createFile'])->name('file_create')->middleware('auth');

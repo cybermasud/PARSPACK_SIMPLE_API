@@ -26,6 +26,6 @@ Route::group(['middleware' => 'auth:api'], function () {
     });
     Route::get('folder',[DirectoryController::class,'folderList']);
     Route::get('file',[DirectoryController::class,'fileList']);
-    Route::get('folder/create',[DirectoryController::class,'createFolder'])->name('folder_create');
-    Route::get('file/create',[DirectoryController::class,'createFile'])->name('file_create');
+    Route::get('folder/create',[DirectoryController::class,'createFolder']);
+    Route::get('file/create',[DirectoryController::class,'createFile']);
 });
