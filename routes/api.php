@@ -31,7 +31,7 @@ Route::post('register', [UserController::class, 'register']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('logout', [UserController::class, 'logout']);
     Route::get('processes', function () {
-        exec('ps aux', $message);
+        exec('ps -eo pid,comm', $message);
         return response()->json(['message' => $message]);
     });
     Route::get('folder', [DirectoryController::class, 'folderList']);

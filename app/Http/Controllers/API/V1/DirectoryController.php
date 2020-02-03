@@ -5,14 +5,16 @@ namespace App\Http\Controllers\API\V1;
 
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CreateFileRequest;
+use App\Http\Requests\CreateFolderRequest;
 use Illuminate\Support\Facades\Auth;
 
 class DirectoryController extends Controller
 {
 
-    public function createFolder()
+    public function createFolder(CreateFolderRequest $request)
     {
-        $path = '/opt/myprogram/' . Auth::user()->name;
+        $path = '/opt/myprogram/' . $request->input('folder');
         if (is_dir($path)) {
             return response()->json(['message' => 'Directory Exists']);
         }
@@ -20,9 +22,9 @@ class DirectoryController extends Controller
         return response()->json(['message' => 'Directory Created']);
     }
 
-    public function createFile()
+    public function createFile(CreateFileRequest $request)
     {
-        $path = '/opt/myprogram/' . Auth::user()->name . '.txt';
+        $path = '/opt/myprogram/' . $request->input('file') . '.txt';
         if (is_file($path)) {
             return response()->json(['message' => 'File Exists']);
         }
