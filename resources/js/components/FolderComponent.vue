@@ -7,7 +7,7 @@
                         Folders List
                     </span>
 
-                    <a class="action-link" style="cursor: pointer" tabindex="-1" @click="showCreateFileForm">
+                    <a class="action-link" style="cursor: pointer" tabindex="-1" @click="showCreateFolderForm">
                         Create New Folder
                     </a>
                 </div>
@@ -21,7 +21,7 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="modal-create-file" tabindex="-1" role="dialog">
+        <div class="modal fade" id="modal-create-folder" tabindex="-1" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -51,7 +51,7 @@
                                 <label class="col-md-3 col-form-label">Name</label>
 
                                 <div class="col-md-9">
-                                    <input id="create-file-name" type="text" class="form-control"
+                                    <input id="create-folder-name" type="text" class="form-control"
                                            @keyup.enter="store" v-model="createForm.name">
                                 </div>
                             </div>
@@ -103,8 +103,8 @@
             prepareComponent() {
                 this.getFolders();
 
-                $('#modal-create-file').on('shown.bs.modal', () => {
-                    $('#create-file-name').focus();
+                $('#modal-create-folder').on('shown.bs.modal', () => {
+                    $('#create-folder-name').focus();
                 });
             },
 
@@ -121,8 +121,8 @@
             /**
              * Show the form for creating new clients.
              */
-            showCreateFileForm() {
-                $('#modal-create-file').modal('show');
+            showCreateFolderForm() {
+                $('#modal-create-folder').modal('show');
             },
 
             /**
@@ -131,7 +131,7 @@
             store() {
                 this.persist(
                     'post', '/api/folder/create',
-                    this.createForm, '#modal-create-file'
+                    this.createForm, '#modal-create-folder'
                 );
             },
             persist(method, uri, form, modal) {
@@ -139,7 +139,7 @@
 
                 axios[method](uri, form)
                     .then(response => {
-                        this.getFiles();
+                        this.getFolders();
 
                         form.name = '';
                         form.redirect = '';
