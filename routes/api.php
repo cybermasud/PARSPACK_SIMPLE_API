@@ -15,15 +15,15 @@ use Illuminate\Http\Request;
 |
 */
 Route::get('', function () {
-    return response()->json(['available routes'=>[['post: api/login'=>['keys'=>'email, password']],
-        ['post: api/register'=>['keys'=>'name, email, password, c_password']],
-        ['get: api/logout'=>['header'=>'authorization: Bearer token']],
-        ['get: api/processes'=>['header'=>'authorization: Bearer token']],
-        ['get: api/folder'=>['header'=>'authorization: Bearer token']],
-        ['get: api/file'=>['header'=>'authorization: Bearer token']],
-        ['post: api/folder/create'=>['header'=>'authorization: Bearer token']],
-        ['post: api/file/create'=>['header'=>'authorization: Bearer token']]
-        ]]);
+    return response()->json(['available routes' => [['post: api/login' => ['keys' => 'email, password']],
+        ['post: api/register' => ['keys' => 'name, email, password, c_password']],
+        ['get: api/logout' => ['header' => 'authorization: Bearer token']],
+        ['get: api/processes' => ['header' => 'authorization: Bearer token']],
+        ['get: api/folder' => ['header' => 'authorization: Bearer token']],
+        ['get: api/file' => ['header' => 'authorization: Bearer token']],
+        ['post: api/folder/create' => ['header' => 'authorization: Bearer token']],
+        ['post: api/file/create' => ['header' => 'authorization: Bearer token']]
+    ]]);
 });
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
@@ -31,7 +31,12 @@ Route::post('register', [UserController::class, 'register']);
 Route::group(['middleware' => 'auth:api'], function () {
     Route::get('logout', [UserController::class, 'logout']);
     Route::get('processes', function () {
-        exec('ps -eo pid,comm', $message);
+        $message = [];
+        exec('ps -eo pid', $pid);
+        exec('ps -eo comm', $comm);
+        foreach ($pid as $key => $item) {
+            $message = 'pid:' . $item . ',' . 'process:' . $comm[$key];
+        }
         return response()->json(['message' => $message]);
     });
     Route::get('folder', [DirectoryController::class, 'folderList']);
