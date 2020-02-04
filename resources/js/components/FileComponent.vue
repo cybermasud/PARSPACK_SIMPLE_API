@@ -7,7 +7,7 @@
                         Files List
                     </span>
 
-                    <a class="action-link" tabindex="-1" @click="showCreateFileForm">
+                    <a class="action-link" style="cursor: pointer" tabindex="-1" @click="showCreateFileForm">
                         Create New File
                     </a>
                 </div>
