@@ -2030,7 +2030,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
     /**
      * Show the form for creating new clients.
      */
-    showCreateClientForm: function showCreateClientForm() {
+    showCreateFileForm: function showCreateFileForm() {
       $('#modal-create-file').modal('show');
     },
 
@@ -37557,10 +37557,9 @@ var render = function() {
             _c(
               "a",
               {
-                staticClass: "page-link",
-                staticStyle: { cursor: "pointer" },
+                staticClass: "action-link",
                 attrs: { tabindex: "-1" },
-                on: { click: _vm.showCreateClientForm }
+                on: { click: _vm.showCreateFileForm }
               },
               [
                 _vm._v(

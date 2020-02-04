@@ -7,7 +7,7 @@
                         Files List
                     </span>
 
-                    <a class="page-link" style="cursor: pointer" tabindex="-1" @click="showCreateClientForm">
+                    <a class="action-link" tabindex="-1" @click="showCreateFileForm">
                         Create New File
                     </a>
                 </div>
@@ -123,7 +123,7 @@
             /**
              * Show the form for creating new clients.
              */
-            showCreateClientForm() {
+            showCreateFileForm() {
                 $('#modal-create-file').modal('show');
             },
 
