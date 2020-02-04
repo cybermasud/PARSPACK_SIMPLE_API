@@ -24,7 +24,7 @@ class DirectoryController extends Controller
 
     public function createFile(CreateFileRequest $request)
     {
-        $path = '/opt/myprogram/' . $request->input('file') . '.txt';
+        $path = '/opt/myprogram/' . $request->input('name') . '.txt';
         if (is_file($path)) {
             return response()->json(['message' => 'File Exists']);
         }

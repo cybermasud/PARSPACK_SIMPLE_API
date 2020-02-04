@@ -24,7 +24,7 @@ class CreateFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'folder'=>'required|alpha|max:50'
+            'name'=>'required|alpha|max:50'
         ];
     }
 }

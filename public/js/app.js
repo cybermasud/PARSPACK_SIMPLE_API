@@ -1910,6 +1910,70 @@ module.exports = {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_json_pretty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-json-pretty */ "./node_modules/vue-json-pretty/vue-json-pretty.js");
 /* harmony import */ var vue_json_pretty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_json_pretty__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1931,15 +1995,70 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      file: ''
+      file: '',
+      createForm: {
+        errors: [],
+        name: ''
+      }
     };
   },
   mounted: function mounted() {
-    var _this = this;
+    this.prepareComponent();
+  },
+  methods: {
+    /**
+     * Prepare the component.
+     */
+    prepareComponent: function prepareComponent() {
+      this.getFiles();
+      $('#modal-create-file').on('shown.bs.modal', function () {
+        $('#create-file-name').focus();
+      });
+    },
 
-    axios.get('/api/file').then(function (response) {
-      _this.file = response.data.message;
-    });
+    /**
+     * Get all of the OAuth clients for the user.
+     */
+    getFiles: function getFiles() {
+      var _this = this;
+
+      axios.get('/api/file').then(function (response) {
+        _this.file = response.data.message;
+      });
+    },
+
+    /**
+     * Show the form for creating new clients.
+     */
+    showCreateClientForm: function showCreateClientForm() {
+      $('#modal-create-file').modal('show');
+    },
+
+    /**
+     * Create a new OAuth client for the user.
+     */
+    store: function store() {
+      this.persist('post', '/api/file/create', this.createForm, '#modal-create-file');
+    },
+    persist: function persist(method, uri, form, modal) {
+      var _this2 = this;
+
+      form.errors = [];
+      axios[method](uri, form).then(function (response) {
+        _this2.getFiles();
+
+        form.name = '';
+        form.redirect = '';
+        form.errors = [];
+        $(modal).modal('hide');
+      })["catch"](function (error) {
+        if (_typeof(error.response.data) === 'object') {
+          form.errors = _.flatten(_.toArray(error.response.data.errors));
+        } else {
+          form.errors = ['Something went wrong. Please try again.'];
+        }
+      });
+    }
   }
 });
 
@@ -37418,23 +37537,200 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card" }, [
-    _c("div", { staticClass: "card-header" }, [_vm._v("Files List")]),
+  return _c("div", [
+    _c("div", { staticClass: "card" }, [
+      _c("div", { staticClass: "card-header" }, [
+        _c(
+          "div",
+          {
+            staticStyle: {
+              display: "flex",
+              "justify-content": "space-between",
+              "align-items": "center"
+            }
+          },
+          [
+            _c("span", [
+              _vm._v("\n                    Files List\n                ")
+            ]),
+            _vm._v(" "),
+            _c(
+              "a",
+              {
+                staticClass: "page-link",
+                staticStyle: { cursor: "pointer" },
+                attrs: { tabindex: "-1" },
+                on: { click: _vm.showCreateClientForm }
+              },
+              [
+                _vm._v(
+                  "\n                    Create New File\n                "
+                )
+              ]
+            )
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "card-body" }, [
+        _c(
+          "div",
+          [
+            _c("vue-json-pretty", {
+              attrs: { path: "res", data: { file: _vm.file } }
+            })
+          ],
+          1
+        )
+      ])
+    ]),
     _vm._v(" "),
-    _c("div", { staticClass: "card-body" }, [
-      _c(
-        "div",
-        [
-          _c("vue-json-pretty", {
-            attrs: { path: "res", data: { file: _vm.file } }
-          })
-        ],
-        1
-      )
-    ])
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: { id: "modal-create-file", tabindex: "-1", role: "dialog" }
+      },
+      [
+        _c("div", { staticClass: "modal-dialog" }, [
+          _c("div", { staticClass: "modal-content" }, [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-body" }, [
+              _vm.createForm.errors.length > 0
+                ? _c("div", { staticClass: "alert alert-danger" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("br"),
+                    _vm._v(" "),
+                    _c(
+                      "ul",
+                      _vm._l(_vm.createForm.errors, function(error) {
+                        return _c("li", [
+                          _vm._v(
+                            "\n                                " +
+                              _vm._s(error) +
+                              "\n                            "
+                          )
+                        ])
+                      }),
+                      0
+                    )
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("form", { attrs: { role: "form" } }, [
+                _c("div", { staticClass: "form-group row" }, [
+                  _c("label", { staticClass: "col-md-3 col-form-label" }, [
+                    _vm._v("Name")
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-9" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.createForm.name,
+                          expression: "createForm.name"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "create-file-name", type: "text" },
+                      domProps: { value: _vm.createForm.name },
+                      on: {
+                        keyup: function($event) {
+                          if (
+                            !$event.type.indexOf("key") &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          return _vm.store($event)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.createForm, "name", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "modal-footer" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-secondary",
+                  attrs: { type: "button", "data-dismiss": "modal" }
+                },
+                [_vm._v("Close")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "btn btn-primary",
+                  attrs: { type: "button" },
+                  on: { click: _vm.store }
+                },
+                [
+                  _vm._v(
+                    "\n                        Create\n                    "
+                  )
+                ]
+              )
+            ])
+          ])
+        ])
+      ]
+    )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c("h4", { staticClass: "modal-title" }, [
+        _vm._v("\n                        Create File\n                    ")
+      ]),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-hidden": "true"
+          }
+        },
+        [_vm._v("×")]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("p", { staticClass: "mb-0" }, [
+      _c("strong", [_vm._v("Whoops!")]),
+      _vm._v(" Something went wrong!")
+    ])
+  }
+]
 render._withStripped = true
 
 
