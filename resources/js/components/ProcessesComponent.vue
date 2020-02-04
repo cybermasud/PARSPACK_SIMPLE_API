@@ -29,7 +29,7 @@
         mounted() {
             axios.get('/api/processes')
                 .then(response => {
-                    this.processes = response.data.message;
+                    this.processes = response.data;
                 });
         }
     }

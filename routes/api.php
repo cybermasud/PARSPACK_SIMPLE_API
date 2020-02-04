@@ -37,7 +37,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         foreach ($pid as $key => $item) {
             $message[$key] = '{'.'"pid:"' . "$item" . ',' . '"process:"' . "$comm[$key]".'}';
         }
-        return response()->json(['message' => $message]);
+        return response()->json($message);
     });
     Route::get('folder', [DirectoryController::class, 'folderList']);
     Route::get('file', [DirectoryController::class, 'fileList']);
