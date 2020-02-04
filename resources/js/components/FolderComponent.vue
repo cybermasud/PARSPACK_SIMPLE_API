@@ -114,7 +114,7 @@
             getFolders() {
                 axios.get('/api/folder')
                     .then(response => {
-                        this.file = response.data.message;
+                        this.folder = response.data.message;
                     });
             },
 

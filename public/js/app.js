@@ -2175,8 +2175,8 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
      */
     prepareComponent: function prepareComponent() {
       this.getFolders();
-      $('#modal-create-file').on('shown.bs.modal', function () {
-        $('#create-file-name').focus();
+      $('#modal-create-folder').on('shown.bs.modal', function () {
+        $('#create-folder-name').focus();
       });
     },
 
@@ -2187,29 +2187,29 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
       var _this = this;
 
       axios.get('/api/folder').then(function (response) {
-        _this.file = response.data.message;
+        _this.folder = response.data.message;
       });
     },
 
     /**
      * Show the form for creating new clients.
      */
-    showCreateFileForm: function showCreateFileForm() {
-      $('#modal-create-file').modal('show');
+    showCreateFolderForm: function showCreateFolderForm() {
+      $('#modal-create-folder').modal('show');
     },
 
     /**
      * Create a new OAuth client for the user.
      */
     store: function store() {
-      this.persist('post', '/api/folder/create', this.createForm, '#modal-create-file');
+      this.persist('post', '/api/folder/create', this.createForm, '#modal-create-folder');
     },
     persist: function persist(method, uri, form, modal) {
       var _this2 = this;
 
       form.errors = [];
       axios[method](uri, form).then(function (response) {
-        _this2.getFiles();
+        _this2.getFolders();
 
         form.name = '';
         form.redirect = '';
@@ -37893,7 +37893,7 @@ var render = function() {
                 staticClass: "action-link",
                 staticStyle: { cursor: "pointer" },
                 attrs: { tabindex: "-1" },
-                on: { click: _vm.showCreateFileForm }
+                on: { click: _vm.showCreateFolderForm }
               },
               [
                 _vm._v(
@@ -37922,7 +37922,7 @@ var render = function() {
       "div",
       {
         staticClass: "modal fade",
-        attrs: { id: "modal-create-file", tabindex: "-1", role: "dialog" }
+        attrs: { id: "modal-create-folder", tabindex: "-1", role: "dialog" }
       },
       [
         _c("div", { staticClass: "modal-dialog" }, [
@@ -37969,7 +37969,7 @@ var render = function() {
                         }
                       ],
                       staticClass: "form-control",
-                      attrs: { id: "create-file-name", type: "text" },
+                      attrs: { id: "create-folder-name", type: "text" },
                       domProps: { value: _vm.createForm.name },
                       on: {
                         keyup: function($event) {
