@@ -14,7 +14,7 @@ class DirectoryController extends Controller
 
     public function createFolder(CreateFolderRequest $request)
     {
-        $path = '/opt/myprogram/' . $request->input('folder');
+        $path = '/opt/myprogram/' . $request->input('name');
         if (is_dir($path)) {
             return response()->json(['message' => 'Directory Exists']);
         }
