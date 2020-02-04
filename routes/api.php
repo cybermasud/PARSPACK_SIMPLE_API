@@ -35,7 +35,7 @@ Route::group(['middleware' => 'auth:api'], function () {
         exec('ps -eo pid', $pid);
         exec('ps -eo comm', $comm);
         foreach ($pid as $key => $item) {
-            $message = 'pid:' . $item . ',' . 'process:' . $comm[$key];
+            $message[$key] = 'pid:' . $item . ',' . 'process:' . $comm[$key];
         }
         return response()->json(['message' => $message]);
     });
